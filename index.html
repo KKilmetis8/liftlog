@@ -53,6 +53,12 @@ nav button[aria-current="true"]{color:var(--ink);border-top-color:var(--var);fon
 .ex:last-of-type{border-bottom:0}
 .exname{font-weight:500}
 .grp{font-family:var(--fh);font-weight:700;font-size:1.05rem;color:var(--muted);margin:18px 2px 8px}
+.newex{margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+.nxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px 12px;margin:10px 0}
+.nxgrid label{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0;font-weight:400;text-transform:capitalize}
+.nxgrid select{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:3px 6px}
+.tabpick{display:flex;flex-wrap:wrap;gap:8px 16px}
+.tabpick label{display:flex;gap:6px;align-items:center;margin:0;font-weight:400}
 .recs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 14px}
 .recs div{line-height:1.25}
 .recs small{display:block;color:var(--muted);font-size:.8rem}
@@ -76,7 +82,12 @@ nav button[aria-current="true"]{color:var(--ink);border-top-color:var(--var);fon
 .xdel{float:right;background:none;border:0;color:var(--muted);padding:2px 6px;font-size:.95rem}
 .xdel.armed{color:var(--fail)}
 .actions{margin-top:12px;display:flex;justify-content:flex-end}
-.danger{background:none;border:1px solid var(--line);border-radius:4px;padding:6px 12px;color:var(--muted)}
+.row,.hint,.mline,.ex,.map,.wnotes,.note,.issue,.sub{overflow-wrap:break-word;word-break:break-word}
+.mhead>*,.recs>*,.two>*,.head>*{min-width:0}
+.map>span{min-width:0}
+.map select{max-width:100%}
+select{max-width:100%;text-overflow:ellipsis}
+.danger{white-space:normal;text-align:center;max-width:100%;background:none;border:1px solid var(--line);border-radius:4px;padding:6px 12px;color:var(--muted)}
 .danger.armed{border-color:var(--fail);color:var(--fail)}
 
 /* muscles */
@@ -148,9 +159,8 @@ const EX=[
  {id:"dragonflag",name:"Dragon flag",a:["dragon flag","dragon flags","df"],m:{abs:1}},
  {id:"backext",name:"Back extension",a:["ραχιαιοι","ραχιαιους","raxaioi","raxaoi","back extension","back extensions","hyperextension","hyperextensions"],m:{"lower back":1,glutes:.5}},
  {id:"calfraise",name:"Calf raise",a:["γαμπες","γαμπα","gampes","gampa","calves","calf","calf raise","calf raises"],m:{calves:1}},
- {id:"bench",name:"Bench press",a:["bp","bench","bench press","πιεσεις","πιεσεις στηθους","παγκος","παγκο"],m:{chest:1,triceps:.5,shoulders:.5}},
+ {id:"bench",name:"Bench press",a:["bp","bench","bench press","chest press","chest","στηθος","πιεσεις","πιεσεις στηθους","παγκος","παγκο"],m:{chest:1,triceps:.5,shoulders:.5}},
  {id:"incline",name:"Incline bench press",a:["incline","incline bench","incline press","ibp","incline bp","κεκλιμενο","κεκλιμενες","επικλινης","επικλινης παγκος"],m:{chest:1,shoulders:.5,triceps:.5}},
- {id:"chestpress",name:"Chest press",a:["chest press","chest","στηθος"],m:{chest:1,triceps:.5,shoulders:.25}},
  {id:"pecdeck",name:"Pec deck",a:["pec deck","pec dec","pec dek","pec fly"],m:{chest:1}},
  {id:"ezcurl",name:"Bicep curl",a:["bicep","biceps","curl","curls","bicep curl","bicep curls","grizzly curl","δικεφαλα","δικεφαλοι","δικεφαλος","δικεφαλο","dikefala"],m:{biceps:1}},
  {id:"hammer",name:"Hammer curl",a:["hammer","hammers","hammer curl","hammer curls","bicep hammer","hammer preacher","hammer preacher bar","σφυρι","σφυρια"],m:{biceps:1}},
@@ -161,7 +171,7 @@ const EX=[
  {id:"pushdown",name:"Tricep pulldown",a:["tri pulldown","tri pulldowns","tri pull down","tricep pulldown","tricep pulldowns","triceps pulldown","tri pd","tri rope pulldown","τρικεφαλα pulldown","τρικεφαλα pull down","τρικεφαλο pull down","τρικεφαλα πουλνταουν","τρι pulldown","τρικεφαλα v bar pulldown","pushdown","tricep pushdown"],m:{triceps:1}},
  {id:"triover",name:"Overhead tricep extension",a:["tri overhead","tricep overhead","triceps overhead","overhead extension"],m:{triceps:1}},
  {id:"ohp",name:"Overhead press",a:["ohp","overhead press","military press","shoulder press","dumbell ohp","στρατιωτικες","πιεσεις ωμων","ωμοι"],m:{shoulders:1,triceps:.5}},
- {id:"lateral",name:"Lateral raise",a:["lateral raise","lateral raises","laterals","side raise","side raises","side fly","side flys","side flies","shoulder fly","πλαγιες","πλαγιες ανυψωσεις","ανυψωσεις πλαγιες"],m:{shoulders:1}},
+ {id:"lateral",name:"Side delt fly",a:["side delt fly","side delt flys","lateral raise","lateral raises","laterals","side raise","side raises","side fly","side flys","side flies","shoulder fly","πλαγιες","πλαγιες ανυψωσεις","ανυψωσεις πλαγιες"],m:{shoulders:1}},
  {id:"reardelt",name:"Rear delt fly",a:["rear delt fly","rear delt flys","rear delt flies","rear fly","rear flys","rear flies","rear delt","rear delts","rear delt raise","read delt fly","reverse pec dec","reverse pec deck","rev pec dec","rev pec deck"],m:{shoulders:1}},
  {id:"pullup",name:"Pull-up",a:["pullup","pullups","pull up","pull ups","chin up","chinup","chinups","μονοζυγο","ελξεις","ελξη"],m:{lats:1,biceps:.5}},
  {id:"row",name:"Row",a:["row","rows","bb row","barbell row","bent over rows","bent over barbell rows","h row","l row","row hor","pull horizontal","κωπηλατικο","κωπηλατικα","κωπηλατικη","κωπηλατικες","κοπηλατικο"],m:{lats:1,biceps:.5,"lower back":.25}},
@@ -169,16 +179,48 @@ const EX=[
  {id:"legpress",name:"Leg press",a:["leg press","πρεσα"],m:{quads:1,glutes:.5}},
  {id:"legcurl",name:"Leg curl",a:["leg curl","hamstring curl","hamstring curls","ham curl","οπισθιοι","οπισθιοι μηριαιοι"],m:{hamstrings:1}},
  {id:"legext",name:"Leg extension",a:["leg extension","leg ext","quad curl","quad curls","εκτασεις","τετρακεφαλοι"],m:{quads:1}},
- {id:"abductor",name:"Abductor machine",a:["abductors","abductor","abductor machine","hip abduction","απαγωγοι","απαγωγος"],m:{abductors:1}},
- {id:"hipthrust",name:"Hip thrust",a:["hip thrust","hip thrusts","glute drive","gd","glutes","glute","γλουτοι"],m:{glutes:1,hamstrings:.25}},
+ {id:"abductor",name:"Abductor",a:["abductors","abductor","abductor machine","hip abduction","απαγωγοι","απαγωγος"],m:{abductors:1}},
+ {id:"hipthrust",name:"Glute drive",a:["hip thrust","hip thrusts","glute drive","gd","glutes","glute","γλουτοι"],m:{glutes:1,hamstrings:.25}},
  {id:"lunge",name:"Lunge",a:["lunge","lunges","προβολες"],m:{quads:1,glutes:.75}},
  {id:"pushup",name:"Push-up",a:["pushup","pushups","push up","push ups","καμψεις"],m:{chest:1,triceps:.5,shoulders:.25}},
  {id:"plank",name:"Plank",a:["plank","σανιδα"],m:{abs:1}},
  {id:"crunch",name:"Crunch",a:["crunch","crunches","ab crunch"],m:{abs:1}},
- {id:"abmachine",name:"Ab machine",a:["κοιλιακοι","κοιλιακα","koiliakoi","abs","ab","aba","ab machine"],m:{abs:1}},
+ {id:"abmachine",name:"Machine crunch",a:["machine crunch","κοιλιακοι","κοιλιακα","koiliakoi","abs","ab","aba","ab machine"],m:{abs:1}},
  {id:"legraise",name:"Leg raise",a:["leg raise","leg raises","abs leg raises","side leg raises","ανυψωσεις ποδιων","ανυψωσεις ποδια"],m:{abs:1}},
 ];
 const EXBY=Object.fromEntries(EX.map(e=>[e.id,e]));
+const addEx=e=>{if(!EXBY[e.id]){EX.push(e);EXBY[e.id]=e}};
+/* tags = the modifiers an exercise normally takes (informational: any modifier you write is still kept) */
+const GLOBAL_TAGS=["Dumbbell","Barbell"];
+const TAGS={bench:["Machine"],incline:["Machine"],ohp:["Machine","Good machine","Plate loaded"],pushdown:["V bar","Rope"],triover:["V bar","Rope"],
+ ezcurl:["EZ"],skull:["EZ"],hammer:["EZ"],preacher:["EZ"],forearm:["EZ","Reverse","Front"],pulldown:["Plate loaded","Horizontal bar","Small grip"],
+ row:["Machine","Good machine","Cable","Wide","Vertical","Horizontal"],pullup:["Closed","Band"],abductor:["Interior","Exterior"],abmachine:["Machine"],
+ legpress:["Machine"],squat:["Smith"],backext:["Machine"],dips:["Machine"],calfraise:["Machine"]};
+const tagsOf=e=>[...new Set([...(e.t||TAGS[e.id]||[]),...GLOBAL_TAGS])];
+const ORIG=Object.fromEntries(EX.map(e=>[e.id,JSON.parse(JSON.stringify(e))]));
+const musclesTxt=m=>Object.entries(m||{}).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]).map(([k,v])=>v===1?k:k+" "+({.5:"½",.25:"¼"}[v]||v)).join(", ")||"no muscle group";
+function applyOverrides(){Object.entries(db.exOverrides||{}).forEach(([id,o])=>{if(EXBY[id])Object.assign(EXBY[id],o)})}
+const muscleGrid=m=>`<div class="nxgrid">${MUSCLES.map(k=>`<label><span>${k}</span><select data-nm="${k}">${[["0","–"],[".25","¼"],[".5","½"],["1","1"]].map(([v,t])=>`<option value="${v}" ${+v===(m&&m[k]||0)?"selected":""}>${t}</option>`).join("")}</select></label>`).join("")}</div>`;
+const readGrid=host=>{const m={};host.querySelectorAll("[data-nm]").forEach(x=>{if(+x.value)m[x.dataset.nm]=+x.value});return m};
+const exOptions=()=>[...EX].sort((a,b)=>a.name.localeCompare(b.name)).map(e=>`<option value="${e.id}">${esc(e.name)}</option>`).join("")+`<option value="__new">+ New exercise…</option>`;
+/* inline "new exercise" form; maps the given raw names to it */
+function newExForm(host,raws,done){
+  const first=[...raws][0]||"";
+  host.innerHTML=`<div class="newex"><label for="nxName" style="margin-top:0">New exercise name</label>
+    <input type="text" id="nxName" value="${esc(first)}">
+    <p class="hint">How much it works each muscle: 1 = main, ½ = helper, ¼ = a little.</p>
+    ${muscleGrid({})}
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="nxSave" style="margin:0;width:auto;padding:10px 18px;font-size:1rem">Create</button><button class="danger" id="nxCancel">Cancel</button></div></div>`;
+  host.querySelector("#nxCancel").onclick=()=>done(false);
+  host.querySelector("#nxSave").onclick=()=>{
+    const name=host.querySelector("#nxName").value.trim();if(!name){host.querySelector("#nxName").focus();return}
+    const m=readGrid(host);
+    const e={id:"u_"+uid(),name,a:[name],m};db.exercises.push(e);addEx(e);
+    raws.forEach(r=>{const b=splitMods(r).base;db.aliases[b||norm(r)]=e.id});
+    store(KEY,db);toast(`“${name}” created`);done(true);
+  };
+  host.querySelector("#nxName").focus();
+}
 
 
 /* ===================== storage ===================== */
@@ -211,6 +253,8 @@ const MODS={},MODLIST=[
  ["Dumbbell",["ελευθερα","free","βαρη","db","dumbbell","dumbbells","dumbell","dumbells","αλτηρες","αλτηρα","βαρακια","βαρακι","varaki"]],
  ["Barbell",["barbell","μπαρα","mpara","bara"]],["Cable",["cable","καλωδιο"]],["Rope",["rope","σχοινι","σκοινι"]],
  ["V bar",["v bar","vbar","v"]],["Straight bar",["ισιο"]],["Smith",["smith"]],["Wide",["wide","φαρδια","ανοιχτα","πλατυ"]],
+ ["Horizontal bar",["horizontal bar","hor bar","οριζοντια μπαρα"]],["Small grip",["small grip","narrow grip","μικρο γκριπ","στενο γκριπ","στενο"]],
+ ["Interior",["interior","inner","εσωτερικο","εσωτερικα","μεσα"]],["Exterior",["exterior","outer","εξωτερικο","εξωτερικα","εξω"]],
  ["Horizontal",["horizontal","hor","οριζοντιο","οριζοντια"]],["Vertical",["vertical","ver","καθετο","καθετα"]],
  ["Plate loaded",["plate loaded","plate"]],["Band",["λαστιχο","band"]],
  ["Reverse",["πισω"]],["Front",["μπρος"]],["Alternating",["εναλλαξ","ενναλαξ","ενναλλαξ"]],["Decline",["decline"]],["Odd machine",["περιεργο","periergo"]],
@@ -352,7 +396,10 @@ let toastT;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add
 
 /* ===================== tabs ===================== */
 let tab="history";const open=new Set();
-function setTab(t){tab=t;document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===t));$("#gear").setAttribute("aria-current",t==="settings");render()}
+const TABS=[["history","History"],["muscles","Muscles"],["records","Records"],["weight","Weight"],["log","Log"]];
+const shownTabs=()=>{const t=(load(SKEY,{}).tabs||TABS.map(x=>x[0])).filter(k=>TABS.some(x=>x[0]===k));return t.length?t:["log"]};
+function applyTabs(){const sh=shownTabs();document.querySelectorAll("nav button").forEach(b=>b.hidden=!sh.includes(b.dataset.tab))}
+function setTab(t){if(t!=="settings"&&!shownTabs().includes(t))t=shownTabs()[0];tab=t;document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===t));$("#gear").setAttribute("aria-current",t==="settings");render()}
 $("#gear").onclick=()=>setTab("settings");
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
 
@@ -489,13 +536,14 @@ function renderRecords(rows){
       <button class="xdel" data-rdel="${esc(o.key)}" aria-label="Delete exercise everywhere" style="position:absolute;right:8px;top:44px;background:var(--paper);white-space:nowrap">✕</button>
       <div class="recs">${o.heavy?stat("Heaviest",o.heavy)+stat("Heaviest, 5+ reps",o.heavy5):stat("Most reps",o.reps)}</div>
       ${isOpen?`<div class="body">${sess.length?sess.map(x=>`<div class="mline"><span class="d">${esc(fmtDate(x.date))}</span><span>Best set: ${esc(setTxt(x.best))}</span></div>`).join(""):`<p class="empty">No weighted sets.</p>`}
-        <div class="map" style="margin-top:12px"><span>${o.ex?"Remap to":"Map to"}</span><select data-map="${esc(o.key)}"><option value="">choose…</option>${EX.map(e=>`<option value="${e.id}">${esc(e.name)}</option>`).join("")}</select>
+        <div class="map" style="margin-top:12px"><span>${o.ex?"Remap to":"Map to"}</span><select data-map="${esc(o.key)}"><option value="">choose…</option>${exOptions()}</select>
 </div></div>`:""}</div>`;
   }).join("");
   $("#view").querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{const k=b.dataset.r;open.has(k)?open.delete(k):open.add(k);render()});
   const byKey=Object.fromEntries(list.map(o=>[o.key,o]));
   $("#view").querySelectorAll("[data-map]").forEach(sl=>sl.onchange=()=>{
     if(!sl.value)return;
+    if(sl.value==="__new"){const host=document.createElement("div");sl.closest(".map").after(host);sl.value="";newExForm(host,byKey[sl.dataset.map].raws,ok=>ok?render():host.remove());return}
     byKey[sl.dataset.map].raws.forEach(r=>{const b=splitMods(r).base;db.aliases[b||norm(r)]=sl.value}); // map the base name, keep modifiers
     store(KEY,db);toast("Mapped");render();
   });
@@ -580,7 +628,7 @@ function renderLog(){
     <div><label for="logTitle">Title</label><input type="text" id="logTitle" placeholder="Leg, Push/bicep…" value="${esc(d.title||"")}"></div></div>
     <label for="logText">Workout</label>
     <textarea id="logText" spellcheck="false" placeholder="Squat&#10;10x20 10x60 3x6x100 Fail on last&#10;BicepEZ&#10;4x30+6x20">${esc(d.text)}</textarea>
-    <p class="hint">RxW or SxRxW. x0 is bodyweight, a word instead of kg is a variant, + is a drop set, text after the sets is a note. Pasting several notes with headers like “Gym Leg Oct 5” saves each as its own workout.</p>
+    <p class="hint">RxW or SxRxW. x0 is bodyweight, a word instead of kg is a variant, + links sets (superset), text after the sets is a note. Pasting several notes with headers like “Gym Leg Oct 5” saves each as its own workout.</p>
     <label for="logNotes">Notes</label>
     <textarea id="logNotes" placeholder="How it felt, sleep, anything">${esc(d.notes)}</textarea>
     <button class="primary" id="save">Save workout</button>
@@ -609,12 +657,14 @@ function preview(){
       <span class="date">${esc(fmtDate(w.date))}</span><span class="title">${esc(w.title)}</span></div>
       <div class="body">${entries.map(e=>exLine(e,{})).join("")}${issues.map(i=>`<p class="issue">${esc(i)}</p>`).join("")}</div></div>`;
   }).join("");
-  const opts=EX.map(e=>`<option value="${e.id}">${esc(e.name)}</option>`).join("");
+  const opts=exOptions();
   const mapper=unknown.size?`<h3>Unknown exercises</h3>${[...unknown].map(u=>`<div class="map"><span>${esc(u)} is</span>
     <select data-u="${esc(u)}"><option value="">choose…</option>${opts}</select></div>`).join("")}`:"";
   $("#preview").innerHTML=`<h3>Preview</h3>${html}${mapper}`;
   $("#preview").querySelectorAll("[data-u]").forEach(s=>s.onchange=()=>{
-    if(!s.value)return;db.aliases[norm(s.dataset.u)]=s.value;store(KEY,db);toast(`“${s.dataset.u}” mapped`);preview();
+    if(!s.value)return;
+    if(s.value==="__new"){const host=document.createElement("div");s.closest(".map").after(host);s.value="";newExForm(host,[s.dataset.u],ok=>ok?preview():host.remove());return}
+    db.aliases[norm(s.dataset.u)]=s.value;store(KEY,db);toast(`“${s.dataset.u}” mapped`);preview();
   });
 }
 
@@ -671,14 +721,48 @@ function applySettings(){
   $("#fontLink").href=`https://fonts.googleapis.com/css2?family=${f.css}&display=swap`;
 }
 function toHex(c){c=c.trim();if(/^#[0-9a-f]{6}$/i.test(c))return c;const m=c.match(/\d+/g);return m?"#"+m.slice(0,3).map(x=>(+x).toString(16).padStart(2,"0")).join(""):"#000000"}
+let exOpen=null;
+function renderExList(q){
+  const host=$("#exlist");if(!host)return;const nq=norm(q);
+  const list=[...EX].sort((a,b)=>a.name.localeCompare(b.name)).filter(e=>!nq||norm(e.name).includes(nq)||e.a.some(x=>norm(x).includes(nq)));
+  host.innerHTML=list.map(e=>{
+    const isOpen=exOpen===e.id,custom=e.id.startsWith("u_"),edited=!custom&&db.exOverrides&&db.exOverrides[e.id];
+    return `<div class="row"><button class="head" data-exo="${e.id}" aria-expanded="${isOpen}" style="flex-wrap:wrap;row-gap:2px">
+      <span class="exname">${esc(e.name)}${custom?`<span class="mod">custom</span>`:edited?`<span class="mod">edited</span>`:""}</span>
+      <span class="meta" style="white-space:normal;text-align:right">${esc(musclesTxt(e.m))}</span></button>
+      ${isOpen?`<div class="body">
+        <label for="exn">Name</label><input type="text" id="exn" value="${esc(e.name)}">
+        <label for="exa">Also written as (comma separated)</label><textarea id="exa" rows="2">${esc(e.a.join(", "))}</textarea>
+        <label for="ext">Tags</label><input type="text" id="ext" value="${esc((e.t||TAGS[e.id]||[]).join(", "))}" placeholder="Machine, Rope, V bar">
+        <p class="hint">Dumbbell and Barbell are allowed on every exercise.</p>
+        <label>Muscles</label>${muscleGrid(e.m)}
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="exs" style="margin:0;width:auto;padding:10px 18px;font-size:1rem">Save</button>
+        ${custom?`<button class="danger" id="exd">Delete exercise</button>`:edited?`<button class="danger" id="exr">Reset to default</button>`:""}</div></div>`:""}</div>`;
+  }).join("")||`<p class="empty">No match.</p>`;
+  host.querySelectorAll("[data-exo]").forEach(b=>b.onclick=()=>{exOpen=exOpen===b.dataset.exo?null:b.dataset.exo;renderExList(q)});
+  const e=exOpen&&EXBY[exOpen];if(!e||!$("#exs"))return;
+  const split=v=>v.split(",").map(x=>x.trim()).filter(Boolean);
+  $("#exs").onclick=()=>{
+    const o={name:$("#exn").value.trim()||e.name,a:split($("#exa").value),t:split($("#ext").value),m:readGrid(host)};
+    Object.assign(e,o);
+    if(e.id.startsWith("u_")){const c=db.exercises.find(x=>x.id===e.id);if(c)Object.assign(c,o)}else{db.exOverrides=db.exOverrides||{};db.exOverrides[e.id]=o}
+    store(KEY,db);toast("Exercise saved");renderExList(q);
+  };
+  if($("#exr"))$("#exr").onclick=()=>{delete db.exOverrides[e.id];Object.assign(e,JSON.parse(JSON.stringify(ORIG[e.id])));delete e.t;store(KEY,db);toast("Reset");renderExList(q)};
+  if($("#exd"))$("#exd").onclick=ev=>{const b=ev.target;if(!b.classList.contains("armed")){b.classList.add("armed");b.textContent="Tap again: its entries become unmapped";return}
+    db.exercises=db.exercises.filter(x=>x.id!==e.id);EX.splice(EX.indexOf(e),1);delete EXBY[e.id];
+    Object.keys(db.aliases).forEach(k=>{if(db.aliases[k]===e.id)delete db.aliases[k]});exOpen=null;store(KEY,db);toast("Deleted");renderExList(q)};
+}
 function renderSettings(){
   $("#h").textContent="Settings";$("#sub").textContent="Saved on this device.";
   const st=load(SKEY,{}),cs=getComputedStyle(document.documentElement);
-  $("#view").innerHTML=COLORS.map(([k,n,d])=>`<div class="row"><label class="mhead" style="margin:0;grid-template-columns:1fr auto">
-      <span><span class="mname" style="text-transform:none">${n}</span><br><span class="meta" style="margin:0">${d}</span></span>
-      <span style="display:flex;gap:8px;align-items:center"><input type="text" data-h="${k}" value="${toHex(cs.getPropertyValue("--"+k)).toUpperCase()}" maxlength="7" spellcheck="false" aria-label="${n} hex code" style="width:6.5em;font-family:var(--fh);text-transform:uppercase">
+  $("#view").innerHTML=COLORS.map(([k,n,d])=>`<div class="row"><label class="mhead" style="margin:0;grid-template-columns:minmax(0,1fr) auto">
+      <span style="min-width:0"><span class="mname" style="text-transform:none">${n}</span><br><span class="meta" style="margin:0;white-space:normal">${d}</span></span>
+      <span style="display:flex;gap:8px;align-items:center"><input type="text" data-h="${k}" value="${toHex(cs.getPropertyValue("--"+k)).toUpperCase()}" maxlength="7" spellcheck="false" aria-label="${n} hex code" style="width:6.4em;padding:8px 6px;font-size:.95rem;font-family:var(--fh);text-transform:uppercase">
       <input type="color" data-c="${k}" value="${toHex(cs.getPropertyValue("--"+k))}" aria-label="${n} picker" style="width:52px;height:40px;border:1px solid var(--line);border-radius:6px;background:none;padding:2px"></span></label></div>`).join("")+
-    `<label for="split">Muscle order</label><select id="split" style="width:100%;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:10px 12px">
+    `<label>Tabs shown</label><div class="tabpick">${TABS.map(([k,n])=>`<label><input type="checkbox" data-tab-on="${k}" ${shownTabs().includes(k)?"checked":""}>${n}</label>`).join("")}</div>
+    <p class="hint">The app opens on the first shown tab.</p>
+    <label for="split">Muscle order</label><select id="split" style="width:100%;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:10px 12px">
       ${Object.entries(allSplits()).map(([k,v])=>`<option value="${k}" ${(st.split||"ppl")===k?"selected":""}>${v.name}</option>`).join("")}</select>
     <textarea id="splitText" rows="5" spellcheck="false" style="margin-top:8px;font-family:var(--fh)" aria-label="Edit muscle order">${esc(splitToText(allSplits()[st.split]||SPLITS.ppl))}</textarea>
     <p class="hint" id="splitMsg">One group per line, like “Push: chest, shoulders”. Groups show in this order.</p>
@@ -687,6 +771,9 @@ function renderSettings(){
       <button class="danger" id="splitSave">Save as preset</button>
       ${st.custom&&st.custom[st.split]?`<button class="danger" id="splitUpd">Update “${esc(st.custom[st.split].name)}”</button><button class="danger" id="splitDel">Delete</button>`:""}
     </div>
+    <label for="exq">Exercises</label>
+    <input type="text" id="exq" placeholder="Search ${EX.length} exercises">
+    <div id="exlist" style="margin-top:8px"></div>
     <label>Data</label>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       <label class="danger" style="margin:0;font-weight:400;cursor:pointer">Import .json<input type="file" id="imp" accept=".json,application/json" hidden></label>
@@ -709,6 +796,12 @@ function renderSettings(){
     const ok=/^#[0-9a-f]{6}$/i.test(v);i.style.borderColor=ok?"":"var(--fail)";
     if(ok){setC(i.dataset.h,v.toLowerCase());$(`[data-c="${i.dataset.h}"]`).value=v.toLowerCase()}
   });
+  $("#view").querySelectorAll("[data-tab-on]").forEach(c=>c.onchange=()=>{
+    const on=[...$("#view").querySelectorAll("[data-tab-on]")].filter(x=>x.checked).map(x=>x.dataset.tabOn);
+    if(!on.length){c.checked=true;toast("Keep at least one tab");return}
+    const st=load(SKEY,{});st.tabs=on;store(SKEY,st);applyTabs();
+  });
+  const exq=$("#exq");exq.oninput=()=>renderExList(exq.value);renderExList("");
   $("#split").onchange=e=>{const s=load(SKEY,{});s.split=e.target.value;store(SKEY,s);renderSettings();toast("Muscle order updated")};
   const check=()=>{const r=textToSplit($("#splitText").value);const m=$("#splitMsg");
     if(r.errors.length){m.className="issue";m.textContent=r.errors.join(". ")}
@@ -731,6 +824,8 @@ function renderSettings(){
       }
       const hw=new Set(db.weights.map(x=>x.id));let nw=0;
       for(const x of (j.weights||[]))if(x&&typeof x.kg==="number"&&/^\d{4}-\d\d-\d\dT\d\d:\d\d/.test(x.t)&&!hw.has(x.id)){db.weights.push({id:x.id||uid(),t:x.t,kg:x.kg});nw++}
+      for(const e of (j.exercises||[]))if(e&&e.id&&e.name&&!EXBY[e.id]){const x={id:String(e.id),name:String(e.name),a:(e.a||[]).map(String),m:e.m||{}};db.exercises.push(x);addEx(x)}
+      Object.entries(j.exOverrides||{}).forEach(([id,o])=>{if(EXBY[id]&&!db.exOverrides[id]){db.exOverrides[id]=o;Object.assign(EXBY[id],o)}});
       if(!db.height&&j.height>=100&&j.height<=250)db.height=j.height;
       Object.assign(db.aliases,j.aliases||{});store(KEY,db);toast(`${n} workouts, ${nw} weigh-ins imported`);renderSettings();
     }catch(err){toast("Not a Liftlog file")}
@@ -738,7 +833,7 @@ function renderSettings(){
   (async()=>{const dl=window.claude&&await window.claude.use("downloads");if(tab!=="settings"||!$("#exp"))return;
     $("#exp").hidden=false;
     $("#exp").onclick=async()=>{
-      const fn=`liftlog-${todayISO()}.json`,data=JSON.stringify({app:"liftlog",version:1,workouts:db.workouts.map(({_entries,...w})=>w),weights:db.weights,height:db.height||null,aliases:db.aliases});
+      const fn=`liftlog-${todayISO()}.json`,data=JSON.stringify({app:"liftlog",version:1,workouts:db.workouts.map(({_entries,...w})=>w),weights:db.weights,height:db.height||null,exercises:db.exercises,exOverrides:db.exOverrides,aliases:db.aliases});
       if(dl){try{await dl.save({filename:fn,data})}catch(e){if(e&&e.code!=="declined")toast("Export unavailable here")}return}
       const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type:"application/json"}));a.download=fn;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
     };
@@ -752,10 +847,10 @@ function renderSettings(){
 /* ===================== boot ===================== */
 applySettings();
 if(!db){db={workouts:[],aliases:{}};store(KEY,db)}
-db.weights=db.weights||[];
+db.weights=db.weights||[];db.exercises=db.exercises||[];db.exercises.forEach(addEx);db.exOverrides=db.exOverrides||{};applyOverrides();
 // installable/offline when hosted (GitHub Pages); harmlessly fails elsewhere
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
-setTab("history");
+applyTabs();setTab(shownTabs()[0]);
 </script>
 </body>
 </html>

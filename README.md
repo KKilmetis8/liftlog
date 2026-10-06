@@ -1,19 +1,36 @@
 # Liftlog
 
-Workout log you write as text: `Squat` / `10x20 3x6x100 Fail on last`.
-Runs fully in the browser; each person's data stays in their own phone's storage.
+## Install (Android)
+1. Open the app link in **Chrome**.
+2. Tap **⋮ → Install app** (or *Add to Home screen*).
+3. Open it from the home-screen icon. It works offline.
 
-## Put it online (GitHub Pages)
-1. github.com → **New repository** → name `liftlog` → Public → Create.
-2. **Add file → Upload files** → drop all files from this folder → Commit.
-3. **Settings → Pages** → Source: *Deploy from a branch*, Branch: `main`, folder `/ (root)` → Save.
-4. After ~1 min it's live at `https://<your-username>.github.io/liftlog/`.
+## Using it
+**Log** — write the workout like a note, then tap *Save workout*. Unsaved text is kept as a draft.
+```
+Squat
+10x20 10x60 3x6x100 Fail on last
+Pull ups
+10x0 8x-10 4x15+6x0
+```
+- `10x60` = 10 reps at 60 kg · `3x6x100` = 3 sets of 6 at 100 kg
+- `x0` = bodyweight · `x-10` = 10 kg assisted
+- a word instead of kg is a variant (`10xclosed`)
+- `+` links sets (superset) · `|` marks the sets before it as warm-up
+- words after sets become a note; `fail` marks the set as failed
+- words in the exercise name like `machine`, `EZ`, `dumbbell` are kept as modifiers
 
-## Install on Android
-Open the link in Chrome → ⋮ → **Install app** (or *Add to Home screen*).
+**History** — every workout by date. Tap one to see its sets; ✕ deletes an exercise.
 
-## Your history
-Settings (gear) → **Import .json** → pick `liftlog-import.json` (keep that file out of this repo; the repo is public).
+**Muscles** — sets per muscle group for the last 7 and 28 days, and the last 8 weeks.
 
-## Updating
-Edit `index.html`, then bump `VERSION` in `sw.js` (e.g. `liftlog-v2`) so installed copies refresh.
+**Records** — heaviest set and heaviest set with 5+ reps per exercise. Open one to map it to another exercise, create a new exercise, or tap ✕ to delete it everywhere.
+
+**Weight** — log bodyweight with time. Shows a 7-day average and, once you enter your height, the healthy BMI range.
+
+**Settings (gear)**
+- colours (or *Default dark / light*), font, which tabs are shown
+- muscle order presets (Push/Pull/Legs, Arnold, Upper/Lower, MegaLeg) or your own
+- **Import / Export .json** to back up or move your data
+
+Your data is stored only on your own phone. Nothing is shared.
