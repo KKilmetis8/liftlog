@@ -1,0 +1,7 @@
+# personal data never goes in this public repo
+liftlog-import.json
+liftlog-*.json
+*.zip
+notes/
+exported_notes_*/
+CLAUDE.local.md
